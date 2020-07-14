@@ -1,0 +1,4 @@
+name: Cookie Flag
+description: Flag nodes using cookies
+type: module
+core: 8.x

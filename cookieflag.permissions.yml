@@ -1,0 +1,4 @@
+administer cookieflag settings:
+  title: 'Administer Cookieflag Settings'
+  description: 'A custom permission for administer some Cookieflag settings.'
+  restrict access: TRUE

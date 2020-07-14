@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * Implements hook_page_attachments().
+ */
+function cookieflag_page_attachments(&$attachments) {
+  $attachments['#attached']['library'][] = 'cookieflag/cookieflag';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function cookieflag_theme(array &$settings) {
+
+  return [
+    'cookieflag_counter' => [
+      'variables' => [],
+      'template' => 'block--cookieflag-counter',
+    ],
+    'cookieflag_saved_page' => [
+      'variables' => ['intro' => NULL, 'nodes' => NULL],
+      'template' => 'cookieflag-saved-page',
+    ],
+  ];
+}

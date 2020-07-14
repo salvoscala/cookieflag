@@ -1,0 +1,15 @@
+cookieflag.settings:
+  path: '/admin/config/system/cookieflag'
+  defaults:
+    _form: '\Drupal\cookieflag\Form\CookieFlagSettingsForm'
+    _title: 'Cookieflag Settings'
+  requirements:
+    _permission: 'administer cookieflag settings'
+
+cookieflag.saved:
+  path: '/saved'
+  defaults:
+    _controller: '\Drupal\cookieflag\Controller\CookieFlagSavedPage::content'
+    _title: 'Saved Content'
+  requirements:
+    _permission: 'access content'

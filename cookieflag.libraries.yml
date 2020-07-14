@@ -1,0 +1,6 @@
+cookieflag:
+  js:
+    js/cookieflag.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
