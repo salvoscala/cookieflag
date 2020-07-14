@@ -8,7 +8,7 @@ This project allow users to flag node and save in a cookie. Saved nodes can be v
 
 ## Configuration
 
-    * Configure module: `/admin/config/system/cookieflag` (be sure to have the administer cookieflag settings).
+    * Configure module: `/admin/config/system/cookieflag` (be sure to have the `administer cookieflag settings` permission).
 
 ## Usage
 
