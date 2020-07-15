@@ -62,17 +62,16 @@
   }
 
   function checkExistingFlags(cookie) {
-    var counter = 0;
+    var flagged = cookie.split(',');
     $('.cookieflag').once().each(function() {
       var nodeId = $(this).attr('data-cookieflag-id');
-      var flagged = cookie.split(',');
       var index = flagged.indexOf(nodeId);
       if (index > -1) {
         $(this).addClass('active');
-        counter++;
       }
     });
 
+    var counter = flagged.length;
     updateFlagCounter(counter);
   }
 
