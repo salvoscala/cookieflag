@@ -70,9 +70,10 @@
         $(this).addClass('active');
       }
     });
-
-    var counter = flagged.length;
-    updateFlagCounter(counter);
+    if (flagged != '' && flagged != undefined) {
+      var counter = flagged.length;
+      updateFlagCounter(counter);
+    }
   }
 
   function updateFlagCounter(counter) {
