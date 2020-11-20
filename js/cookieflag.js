@@ -1,7 +1,7 @@
-(function ($, Drupal) {
+(function ($, Drupal, drupalSettings) {
   var cookie = getCookie('cookieflag');
   if (cookie != undefined) {
-    checkExistingFlags(cookie);
+    checkExistingFlags(cookie, drupalSettings);
   }
 
   function getCookie(cname) {
@@ -27,6 +27,7 @@
 
       $('.cookieflag').bind('click tap', function () {
         $(this).toggleClass('active');
+
         var nodeId = $(this).attr('data-cookieflag-id');
         var cookie = $.cookie("cookieflag");
         if (cookie != undefined) {
@@ -68,6 +69,7 @@
       var index = flagged.indexOf(nodeId);
       if (index > -1) {
         $(this).addClass('active');
+        $(this).text(drupalSettings['cookieflag']['cookieflag_flagged_label']);
       }
     });
     if (flagged != '' && flagged != undefined) {
@@ -86,4 +88,4 @@
     }
   }
 
-})(jQuery, Drupal)
+})(jQuery, Drupal, drupalSettings)

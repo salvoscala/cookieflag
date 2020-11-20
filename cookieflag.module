@@ -5,6 +5,9 @@
  */
 function cookieflag_page_attachments(&$attachments) {
   $attachments['#attached']['library'][] = 'cookieflag/cookieflag';
+
+  $cookieflag_settings = \Drupal::state()->get('cookieflag_settings', []);
+  $attachments['#attached']['drupalSettings']['cookieflag'] = $cookieflag_settings;
 }
 
 /**
