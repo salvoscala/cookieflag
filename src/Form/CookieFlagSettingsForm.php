@@ -33,6 +33,14 @@ class CookieFlagSettingsForm extends FormBase {
       $options[$key] = $mode['label'];
     }
 
+
+    $form['cookieflag_flag_label'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Label when item is not flagged'),
+      '#default_value' => $cookieflag_settings['cookieflag_flag_label'] ?? 'Flag',
+      '#required' => TRUE,
+    ];
+
     $form['cookieflag_flagged_label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Label when item is flagged'),
@@ -83,6 +91,7 @@ class CookieFlagSettingsForm extends FormBase {
     $new_values['cookieflag_empty_flag'] = $values['cookieflag_empty_flag'];
     $new_values['cookieflag_view_mode'] = $values['cookieflag_view_mode'];
     $new_values['cookieflag_flagged_label'] = $values['cookieflag_flagged_label'];
+    $new_values['cookieflag_flag_label'] = $values['cookieflag_flag_label'];
 
     // Set State.
     \Drupal::state()->set('cookieflag_settings', $new_values);

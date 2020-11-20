@@ -25,9 +25,14 @@
       var counter = 0;
       var cookie = $.cookie("cookieflag");
 
-      $('.cookieflag').bind('click tap', function () {
+      $('.cookieflag').once('cookieFlag').bind('click tap', function () {
         $(this).toggleClass('active');
-
+        if ($(this).hasClass('active')) {
+          $(this).text(settings['cookieflag']['cookieflag_flagged_label']);
+        }
+        else {
+          $(this).text(settings['cookieflag']['cookieflag_flag_label']);
+        }
         var nodeId = $(this).attr('data-cookieflag-id');
         var cookie = $.cookie("cookieflag");
         if (cookie != undefined) {
