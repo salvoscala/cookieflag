@@ -67,7 +67,7 @@
         }
 
         // Set cookie with new values.
-        $.cookie("cookieflag", newFlags, { expires: 31 });
+        $.cookie("cookieflag", newFlags, { expires: 31 , path: '/'});
         updateFlagCounter(counter);
       });
     }
