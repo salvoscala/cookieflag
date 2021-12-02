@@ -30,13 +30,13 @@
 
         var nodeId = $(this).attr('data-cookieflag-id');
         if ($(this).hasClass('active')) {
-          $(this).text(settings['cookieflag']['cookieflag_flagged_label']);
+          $(this).html(settings['cookieflag']['cookieflag_flagged_label']);
 
           // Trigger custom event
           $( document ).trigger( "cookieflagAdded", nodeId );
         }
         else {
-          $(this).text(settings['cookieflag']['cookieflag_flag_label']);
+          $(this).html(settings['cookieflag']['cookieflag_flag_label']);
           // Trigger custom event
           $( document ).trigger( "cookieflagRemoved", nodeId );
         }
@@ -80,7 +80,7 @@
       var index = flagged.indexOf(nodeId);
       if (index > -1) {
         $(this).addClass('active');
-        $(this).text(drupalSettings['cookieflag']['cookieflag_flagged_label']);
+        $(this).html(drupalSettings['cookieflag']['cookieflag_flagged_label']);
       }
     });
     if (flagged != '' && flagged != undefined) {
