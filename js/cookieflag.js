@@ -22,53 +22,56 @@
 
   Drupal.behaviors.cookieFlag = {
     attach: function(context, settings) {
-      var counter = 0;
-      var cookie = $.cookie("cookieflag");
 
-      $('.cookieflag').once('cookieFlag').bind('click tap', function () {
-        $(this).toggleClass('active');
-
-        var nodeId = $(this).attr('data-cookieflag-id');
-        if ($(this).hasClass('active')) {
-          $(this).html(settings['cookieflag']['cookieflag_flagged_label']);
-
-          // Trigger custom event
-          $( document ).trigger( "cookieflagAdded", nodeId );
-        }
-        else {
-          $(this).html(settings['cookieflag']['cookieflag_flag_label']);
-          // Trigger custom event
-          $( document ).trigger( "cookieflagRemoved", nodeId );
-        }
+      $(document).ready( function() {
+        var counter = 0;
         var cookie = $.cookie("cookieflag");
-        if (cookie != undefined) {
-          if (cookie == '') {
-            // Cookie set but empty.
+
+        $('.cookieflag').once('cookieFlag').bind('click tap', function () {
+          $(this).toggleClass('active');
+
+          var nodeId = $(this).attr('data-cookieflag-id');
+          if ($(this).hasClass('active')) {
+            $(this).html(settings['cookieflag']['cookieflag_flagged_label']);
+
+            // Trigger custom event
+            $( document ).trigger( "cookieflagAdded", nodeId );
+          }
+          else {
+            $(this).html(settings['cookieflag']['cookieflag_flag_label']);
+            // Trigger custom event
+            $( document ).trigger( "cookieflagRemoved", nodeId );
+          }
+          var cookie = $.cookie("cookieflag");
+          if (cookie != undefined) {
+            if (cookie == '') {
+              // Cookie set but empty.
+              var newFlags = nodeId;
+              counter = 1;
+            }
+            else {
+              var flagged = cookie.split(',');
+              var index = flagged.indexOf(nodeId);
+              if (index > -1) {
+                flagged.splice(index, 1);
+              }
+              else {
+                flagged.push(nodeId);
+              }
+              counter = flagged.length;
+              var newFlags = flagged.join(',');
+            }
+          }
+          // New cookie
+          else {
             var newFlags = nodeId;
             counter = 1;
           }
-          else {
-            var flagged = cookie.split(',');
-            var index = flagged.indexOf(nodeId);
-            if (index > -1) {
-              flagged.splice(index, 1);
-            }
-            else {
-              flagged.push(nodeId);
-            }
-            counter = flagged.length;
-            var newFlags = flagged.join(',');
-          }
-        }
-        // New cookie
-        else {
-          var newFlags = nodeId;
-          counter = 1;
-        }
 
-        // Set cookie with new values.
-        $.cookie("cookieflag", newFlags, { expires: 31 , path: '/'});
-        updateFlagCounter(counter);
+          // Set cookie with new values.
+          $.cookie("cookieflag", newFlags, { expires: 31 , path: '/'});
+          updateFlagCounter(counter);
+        });
       });
     }
   }
