@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, cookies) {
   var cookie = getCookie('cookieflag');
   if (cookie != undefined) {
     checkExistingFlags(cookie, drupalSettings);
@@ -21,11 +21,11 @@
   }
 
   Drupal.behaviors.cookieFlag = {
-    attach: function(context, settings) {
+    attach: function(context, settings, cookies) {
 
       $(document).ready( function() {
         var counter = 0;
-        var cookie = $.cookie("cookieflag");
+        var cookie = cookies.get("cookieflag");
 
         $('.cookieflag').once('cookieFlag').bind('click tap', function () {
           $(this).toggleClass('active');
@@ -42,7 +42,7 @@
             // Trigger custom event
             $( document ).trigger( "cookieflagRemoved", nodeId );
           }
-          var cookie = $.cookie("cookieflag");
+          var cookie = cookies.get("cookieflag");
           if (cookie != undefined) {
             if (cookie == '') {
               // Cookie set but empty.
@@ -69,7 +69,7 @@
           }
 
           // Set cookie with new values.
-          $.cookie("cookieflag", newFlags, { expires: 31 , path: '/'});
+          cookies.set("cookieflag", newFlags, { expires: 31 , path: '/'});
           updateFlagCounter(counter);
         });
       });

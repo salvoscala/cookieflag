@@ -4,3 +4,4 @@ cookieflag:
   dependencies:
     - core/jquery
     - core/jquery.once
+    - core/js-cookie
