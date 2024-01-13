@@ -4,28 +4,45 @@
     checkExistingFlags(cookie, drupalSettings);
   }
 
-  function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+
+  function getCookie(cookieName) {
+    // Split the cookie string into an array of individual cookies
+    var cookies = document.cookie.split(';');
+
+    // Loop through the cookies to find the one with the specified name
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+
+        // Check if the cookie starts with the specified name
+        if (cookie.startsWith(cookieName + '=')) {
+            // Extract and return the cookie value
+            return cookie.substring(cookieName.length + 1);
+        }
     }
-    return "";
+
+    // If the cookie is not found, return null or an appropriate default value
+    return null;
   }
+
+  function setCookie(cookieName, cookieValue, expirationDays) {
+    var expires = '';
+
+    if (expirationDays) {
+        var date = new Date();
+        date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+        expires = '; expires=' + date.toUTCString();
+    }
+
+    document.cookie = cookieName + '=' + cookieValue + expires + '; path=/';
+  }
+
 
   Drupal.behaviors.cookieFlag = {
     attach: function(context, settings, cookies) {
 
       $(document).ready( function() {
         var counter = 0;
-        var cookie = cookies.get("cookieflag");
+        var cookie = getCookie("cookieflag");
 
         $('.cookieflag').once('cookieFlag').bind('click tap', function () {
           $(this).toggleClass('active');
@@ -42,7 +59,7 @@
             // Trigger custom event
             $( document ).trigger( "cookieflagRemoved", nodeId );
           }
-          var cookie = cookies.get("cookieflag");
+          var cookie = getCookie("cookieflag");
           if (cookie != undefined) {
             if (cookie == '') {
               // Cookie set but empty.
@@ -69,7 +86,8 @@
           }
 
           // Set cookie with new values.
-          cookies.set("cookieflag", newFlags, { expires: 31 , path: '/'});
+          
+          setCookie("cookieflag", newFlags, { expires: 31 , path: '/'});
           updateFlagCounter(counter);
         });
       });
