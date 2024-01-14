@@ -1,4 +1,4 @@
-(function ($, Drupal, drupalSettings, cookies) {
+(function ($, Drupal, drupalSettings) {
   var cookie = getCookie('cookieflag');
   if (cookie != undefined) {
     checkExistingFlags(cookie, drupalSettings);
@@ -86,8 +86,7 @@
           }
 
           // Set cookie with new values.
-          
-          setCookie("cookieflag", newFlags, { expires: 31 , path: '/'});
+          setCookie('cookieflag', newFlags, 31);
           updateFlagCounter(counter);
         });
       });
