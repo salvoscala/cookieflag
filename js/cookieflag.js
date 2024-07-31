@@ -44,7 +44,7 @@
         var counter = 0;
         var cookie = getCookie("cookieflag");
 
-        $('.cookieflag').once('cookieFlag').bind('click tap', function () {
+        $(once('cookieFlag', '.cookieflag', context)).bind('click tap', function () {
           $(this).toggleClass('active');
 
           var nodeId = $(this).attr('data-cookieflag-id');
@@ -95,7 +95,7 @@
 
   function checkExistingFlags(cookie) {
     var flagged = cookie.split(',');
-    $('.cookieflag').once().each(function() {
+    $(once('cookieflag', '.cookieflag', context)).each(function () {
       var nodeId = $(this).attr('data-cookieflag-id');
       var index = flagged.indexOf(nodeId);
       if (index > -1) {
