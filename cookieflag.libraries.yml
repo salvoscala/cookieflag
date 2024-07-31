@@ -3,4 +3,4 @@ cookieflag:
     js/cookieflag.js: { attributes: { async: true, defer: true }}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
